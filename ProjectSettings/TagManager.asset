@@ -10,7 +10,7 @@ TagManager:
   - Player2
   - World1
   - World2
-  - Changeable
+  - Collectible
   layers:
   - Default
   - TransparentFX
@@ -23,7 +23,7 @@ TagManager:
   - Foreground
   - Player1
   - Player2
-  - 
+  - Collectible
   - 
   - 
   - 

@@ -20,5 +20,6 @@ public class OnCollectionEvent : MonoBehaviour
                 Destroy(_object);
             }
         }
+        Destroy(gameObject);
     }
 }
