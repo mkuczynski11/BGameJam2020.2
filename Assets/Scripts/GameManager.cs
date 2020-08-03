@@ -7,14 +7,17 @@ public class GameManager : MonoBehaviour
 {
     public string viewChange = "r";
     public LayerMask collisionAble;
-    private float collisionRadius = 2.5f;
+    public GameObject mainCamera;
     GameObject world1, world2;
+    GameObject activeWorld;
+    Vector3 worldOffset = new Vector3(0f, 100f, 0f);
 
     void Start()
     {
         world1 = GameObject.FindGameObjectWithTag("World1");
         world2 = GameObject.FindGameObjectWithTag("World2");
-        world2.SetActive(false);
+        activeWorld = world1;
+        GameObject.FindGameObjectWithTag("Player2").GetComponent<PlayerMovement>().isAbleToMove(false);
     }
 
     void Update()
@@ -36,45 +39,51 @@ public class GameManager : MonoBehaviour
         BoxCollider2D playerCollider = null;
         GameObject worldActive = gameObject;
         GameObject worldInActive = gameObject;
-        if (world1.active == true)
+        Vector3 offset = Vector3.zero;
+        if (world1 == activeWorld)
         {
             worldActive = world1;
             worldInActive = world2;
             playerTagActive = "Player1";
             playerTagInActive = "Player2";
+            offset = -worldOffset;
         }
-        else if (world2.active == true)
+        else if (world2 == activeWorld)
         {
             worldActive = world2;
             worldInActive = world1;
             playerTagActive = "Player2";
             playerTagInActive = "Player1";
+            offset = worldOffset;
         }
 
         playerActive = GameObject.FindGameObjectWithTag(playerTagActive).transform;
         playerCollider = playerActive.GetComponent<BoxCollider2D>();
 
         //check for collisions
-        worldInActive.SetActive(true);
-        Collider2D[] colliders = Physics2D.OverlapBoxAll(playerActive.position, new Vector2(playerCollider.size.x, playerCollider.size.y), collisionAble);
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(playerActive.position + offset, new Vector2(playerCollider.size.x, playerCollider.size.y), collisionAble);
         foreach (Collider2D collider in colliders)
         {
-            if (collider.transform.tag != playerTagActive && collider.transform.tag != playerTagInActive)
+            if (collider.transform.tag == "Floor" || collider.transform.tag == "Obsticle")
             {
                 Debug.Log("Cannot change the view. Go into safe zone");
                 Debug.Log(collider.name);
-                worldInActive.SetActive(false);
                 change = false;
             }
         }
 
         //change view
-        if (change)
+        if (change && playerActive.GetComponent<Rigidbody2D>().velocity.y == 0)
         {
             Debug.Log("Changing view");
-            worldActive.SetActive(false);
+            activeWorld = worldInActive;
             playerInActive = GameObject.FindGameObjectWithTag(playerTagInActive).transform;
-            playerInActive.position = playerActive.position;
+            playerInActive.position = playerActive.position + offset;
+            playerInActive.GetComponent<PlayerMovement>().isAbleToMove(true);
+            playerActive.GetComponent<PlayerMovement>().isAbleToMove(false);
+            playerInActive.GetComponent<Rigidbody2D>().velocity = playerActive.GetComponent<Rigidbody2D>().velocity;
+            playerActive.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
+            mainCamera.GetComponent<Camera>().followChange(playerInActive);
         }
     }
 }

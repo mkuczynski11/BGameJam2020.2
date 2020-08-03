@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class IEnums
 {
-    public enum COLLECTIBLE_TYPE
+    public enum TYPE
     {
         END,
         LEVER

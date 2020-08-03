@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-
+    bool isMoving = true;
     float move;
     bool jump;
     CharacterController controller;
@@ -14,8 +14,15 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-        move = Input.GetAxisRaw("Horizontal");
-        jump = Input.GetAxisRaw("Jump") != 0;
-        controller.Move(move, jump);
+        if (isMoving)
+        {
+            move = Input.GetAxisRaw("Horizontal");
+            jump = Input.GetAxisRaw("Jump") != 0;
+            controller.Move(move, jump);
+        }
+    }
+    public void isAbleToMove(bool moving)
+    {
+        isMoving = moving;
     }
 }
