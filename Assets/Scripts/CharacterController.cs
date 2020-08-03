@@ -19,6 +19,8 @@ public class CharacterController : MonoBehaviour
     bool isFacingRight = true;
     Vector3 velocity = Vector3.zero;
 
+    public ParticleSystem dust;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -55,6 +57,7 @@ public class CharacterController : MonoBehaviour
 
         if(isGrounded && jump)
         {
+            PlayDust();
             isGrounded = false;
             rb.AddForce(new Vector2(0f, jumpForce));
         }
@@ -62,11 +65,20 @@ public class CharacterController : MonoBehaviour
 
     void Flip()
     {
+        if(isGrounded)
+        {
+            PlayDust();
+        }
         isFacingRight = !isFacingRight;
 
         Vector3 scale = transform.localScale;
         scale.x *= -1;
         transform.localScale = scale;
+    }
+
+    void PlayDust()
+    {
+        dust.Play();
     }
 }
 
