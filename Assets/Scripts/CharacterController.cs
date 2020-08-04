@@ -68,5 +68,10 @@ public class CharacterController : MonoBehaviour
         scale.x *= -1;
         transform.localScale = scale;
     }
+
+    public void setSpeed(float speed)   
+    {
+        playerSpeed = speed;
+    }
 }
 
