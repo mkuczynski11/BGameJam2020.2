@@ -11,6 +11,8 @@ TagManager:
   - World1
   - World2
   - Collectible
+  - Minecart
+  - Lever
   layers:
   - Default
   - TransparentFX
@@ -24,7 +26,7 @@ TagManager:
   - Player1
   - Player2
   - Collectible
-  - 
+  - Background
   - 
   - 
   - 
@@ -48,6 +50,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 1604712341
+    locked: 0
   - name: Foreground
     uniqueID: 4173319275
+    locked: 0
+  - name: Objects
+    uniqueID: 2655263511
+    locked: 0
+  - name: Player
+    uniqueID: 2564840321
     locked: 0

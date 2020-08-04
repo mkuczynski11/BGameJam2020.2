@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class CharacterController : MonoBehaviour
 {
+    public Animator anim;
     [SerializeField] private float playerSpeed = 100f;
     [SerializeField] private float jumpForce = 400f;                          // Amount of force added when the player jumps.
     [Range(0, .3f)] [SerializeField] private float movementSmoothing = .05f;  // How much to smooth out the movement
@@ -24,6 +25,7 @@ public class CharacterController : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     void FixedUpdate()
@@ -36,6 +38,7 @@ public class CharacterController : MonoBehaviour
             if (colliders[i].gameObject != gameObject)
             {
                 isGrounded = true;
+                anim.SetBool("isJumping", false);
             }
         }
     }
@@ -48,6 +51,7 @@ public class CharacterController : MonoBehaviour
             Vector2 targetVelocity = new Vector2(move * playerSpeed, rb.velocity.y);
             //smooth velocity
             rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, movementSmoothing);
+            anim.SetFloat("Speed", rb.velocity.magnitude);
 
             if (move > 0 && !isFacingRight)
                 Flip();
@@ -57,6 +61,7 @@ public class CharacterController : MonoBehaviour
 
         if(isGrounded && jump)
         {
+            anim.SetBool("isJumping", true);
             PlayDust();
             isGrounded = false;
             rb.AddForce(new Vector2(0f, jumpForce));

@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public GameObject mainCamera;
     GameObject world1, world2;
     GameObject activeWorld;
-    Vector3 worldOffset = new Vector3(0f, 100f, 0f);
+    Vector3 worldOffset = new Vector3(0f, 300f, 0f);
 
     void Start()
     {
@@ -73,11 +73,12 @@ public class GameManager : MonoBehaviour
         }
 
         //change view
-        if (change && playerActive.GetComponent<Rigidbody2D>().velocity.y == 0)
+        if (change)
         {
             Debug.Log("Changing view");
             activeWorld = worldInActive;
             playerInActive = GameObject.FindGameObjectWithTag(playerTagInActive).transform;
+            playerInActive.GetComponent<PlayerMovement>().isAbleToJump(false);
             playerInActive.position = playerActive.position + offset;
             playerInActive.GetComponent<PlayerMovement>().isAbleToMove(true);
             playerActive.GetComponent<PlayerMovement>().isAbleToMove(false);
