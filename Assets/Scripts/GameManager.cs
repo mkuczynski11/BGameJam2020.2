@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
         Collider2D[] colliders = Physics2D.OverlapBoxAll(playerActive.position + offset, new Vector2(playerCollider.size.x, playerCollider.size.y), collisionAble);
         foreach (Collider2D collider in colliders)
         {
-            if (collider.transform.tag == "Floor" || collider.transform.tag == "Obsticle")
+            if (collider.transform.tag == "Floor" || collider.transform.tag == "Obsticle" || collider.transform.tag == "Minecart")
             {
                 Debug.Log("Cannot change the view. Go into safe zone");
                 Debug.Log(collider.name);

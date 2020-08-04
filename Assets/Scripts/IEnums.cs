@@ -7,7 +7,8 @@ public class IEnums
     public enum TYPE
     {
         END,
-        LEVER
+        LEVER,
+        MINECART
     }
 
 }

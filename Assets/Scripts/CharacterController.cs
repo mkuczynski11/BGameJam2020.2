@@ -76,6 +76,12 @@ public class CharacterController : MonoBehaviour
         transform.localScale = scale;
     }
 
+
+    public void setSpeed(float speed)   
+    {
+        playerSpeed = speed;
+    }
+    
     void PlayDust()
     {
         dust.Play();
