@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 2495274341671742161}
   - component: {fileID: 2495274341671742162}
   - component: {fileID: -3235894789679838693}
+  - component: {fileID: 690220137685691259}
+  - component: {fileID: 338762323482776491}
   m_Layer: 8
   m_Name: Minecart
   m_TagString: Minecart
@@ -52,7 +54,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -145,3 +147,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 2
   player: {fileID: 0}
+--- !u!58 &690220137685691259
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2495274341671741996}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 428a430ddba9d8749b19176c949e1fdb, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.85, y: -0.7}
+  serializedVersion: 2
+  m_Radius: 0.4
+--- !u!58 &338762323482776491
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2495274341671741996}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 428a430ddba9d8749b19176c949e1fdb, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.85, y: -0.7}
+  serializedVersion: 2
+  m_Radius: 0.4

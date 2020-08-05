@@ -27,7 +27,6 @@ public class Minecart : MonoBehaviour
         {
             float distanceY, distanceX;
             distanceY = Mathf.Abs(Vector2.Distance(new Vector2(0f, gameObject.transform.position.y), new Vector2(0f, player.transform.position.y)));
-            Debug.Log(distanceY);
             if (!(distanceY > playerDistanceY))
             {
                 distanceX = Mathf.Abs(Vector2.Distance(new Vector2(gameObject.transform.position.x, 0f), new Vector2(player.transform.position.x, 0f)));
