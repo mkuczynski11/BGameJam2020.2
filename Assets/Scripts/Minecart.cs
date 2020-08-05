@@ -14,6 +14,8 @@ public class Minecart : MonoBehaviour
     float playerDistanceY = 1.35f;
     float playerDistanceX = 0.5f;
 
+    public AudioManager audioMenago;
+
     void Start()
     {
         boxCollider = GetComponent<BoxCollider2D>();
@@ -48,6 +50,7 @@ public class Minecart : MonoBehaviour
             active = true;
             player.GetComponent<PlayerMovement>().isAbleToJump(false);
             player.GetComponent<PlayerMovement>().setPlayerSpeed(10f);
+            audioMenago.Play("Cart_Rolling");
         }
 
         if (Input.GetKeyDown("e") && active && !activable)
@@ -55,6 +58,7 @@ public class Minecart : MonoBehaviour
             active = false;
             player.GetComponent<PlayerMovement>().isAbleToJump(true);
             player.GetComponent<PlayerMovement>().setPlayerSpeed(20f);
+            audioMenago.Stop("Cart_Rolling");
         }
 
         if(active)

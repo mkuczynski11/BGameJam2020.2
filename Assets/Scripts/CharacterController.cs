@@ -23,6 +23,8 @@ public class CharacterController : MonoBehaviour
 
     public ParticleSystem dust;
 
+    public AudioManager audioMenago;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -61,11 +63,14 @@ public class CharacterController : MonoBehaviour
         }
 
         if (rb.velocity.y <= 0f && rb.velocity.y >= -0.2f)
+        {
             rb.velocity = new Vector2(rb.velocity.x, 0f);
+        }
 
         if(isGrounded && jump && rb.velocity.y == 0f)
         {
             PlayDust();
+            audioMenago.Play("jump_quotes");
             isGrounded = false;
             rb.AddForce(new Vector2(0f, jumpForce));
         }
