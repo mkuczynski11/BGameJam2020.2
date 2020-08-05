@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 [RequireComponent(typeof(Rigidbody2D))]
 
@@ -38,9 +39,9 @@ public class CharacterController : MonoBehaviour
             if (colliders[i].gameObject != gameObject)
             {
                 isGrounded = true;
-                anim.SetBool("isJumping", false);
             }
         }
+        anim.SetBool("isGrounded", isGrounded);
     }
 
     public void Move(float move, bool jump)
@@ -51,7 +52,7 @@ public class CharacterController : MonoBehaviour
             Vector2 targetVelocity = new Vector2(move * playerSpeed, rb.velocity.y);
             //smooth velocity
             rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, movementSmoothing);
-            anim.SetFloat("Speed", rb.velocity.magnitude);
+            anim.SetFloat("SpeedX", Mathf.Abs(rb.velocity.x));
 
             if (move > 0 && !isFacingRight)
                 Flip();
@@ -59,13 +60,13 @@ public class CharacterController : MonoBehaviour
                 Flip();
         }
 
-        if(isGrounded && jump)
+        if(isGrounded && jump && rb.velocity.y == 0)
         {
-            anim.SetBool("isJumping", true);
             PlayDust();
             isGrounded = false;
             rb.AddForce(new Vector2(0f, jumpForce));
         }
+        anim.SetFloat("SpeedY", rb.velocity.y);
     }
 
     void Flip()

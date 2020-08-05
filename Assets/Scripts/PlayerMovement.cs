@@ -24,6 +24,10 @@ public class PlayerMovement : MonoBehaviour
             if (!canJump) jump = false;
             controller.Move(move, jump);
         }
+        else
+        {
+            GetComponent<Animator>().SetFloat("SpeedX", 0f);
+        }
     }
     public void isAbleToMove(bool moving)
     {
