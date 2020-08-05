@@ -13,6 +13,7 @@ TagManager:
   - Collectible
   - Minecart
   - Lever
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -27,8 +28,8 @@ TagManager:
   - Player2
   - Collectible
   - Background
-  - 
-  - 
+  - Obsticle
+  - Enemy
   - 
   - 
   - 
