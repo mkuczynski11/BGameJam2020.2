@@ -1,16 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.XR.WSA;
 
 public class GameManager : MonoBehaviour
 {
     public string viewChange = "r";
+    public bool canChange = true;
     public LayerMask collisionAble;
     public GameObject mainCamera;
     GameObject world1, world2;
     GameObject activeWorld;
     Vector3 worldOffset = new Vector3(0f, 300f, 0f);
+    public float playerHp = 100f;
+    public Slider slider;
 
     void Start()
     {
@@ -18,14 +22,17 @@ public class GameManager : MonoBehaviour
         world2 = GameObject.FindGameObjectWithTag("World2");
         activeWorld = world1;
         GameObject.FindGameObjectWithTag("Player2").GetComponent<PlayerMovement>().isAbleToMove(false);
+        GameObject.FindGameObjectWithTag("Player2").GetComponent<CharacterController>().disableColliders();
+        GameObject.FindGameObjectWithTag("Player2").GetComponent<Rigidbody2D>().isKinematic = true;
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(viewChange))
+        if(Input.GetKeyDown(viewChange) && canChange)
         {
             changeView();
         }
+        slider.value = playerHp;
     }
 
     void changeView()
@@ -78,12 +85,16 @@ public class GameManager : MonoBehaviour
             Debug.Log("Changing view");
             activeWorld = worldInActive;
             playerInActive = GameObject.FindGameObjectWithTag(playerTagInActive).transform;
-            playerInActive.GetComponent<PlayerMovement>().isAbleToJump(false);
+            playerInActive.GetComponent<CharacterController>().enableColliders();
+            playerInActive.GetComponent<Rigidbody2D>().isKinematic = false;
             playerInActive.position = playerActive.position + offset;
             playerInActive.GetComponent<PlayerMovement>().isAbleToMove(true);
             playerActive.GetComponent<PlayerMovement>().isAbleToMove(false);
             playerInActive.GetComponent<Rigidbody2D>().velocity = playerActive.GetComponent<Rigidbody2D>().velocity;
             playerActive.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
+            playerActive.GetComponent<CharacterController>().disableColliders();
+            playerActive.GetComponent<Rigidbody2D>().isKinematic = true;
+            playerActive.position = new Vector3(-1000f, -1000f, 0f);
             mainCamera.GetComponent<Camera>().followChange(playerInActive);
         }
     }

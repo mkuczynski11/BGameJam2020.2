@@ -14,6 +14,7 @@ TagManager:
   - Minecart
   - Lever
   - Enemy
+  - Dead
   layers:
   - Default
   - TransparentFX

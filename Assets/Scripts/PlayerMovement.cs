@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    bool isMoving = true;
+    public bool isMoving = true;
     float move;
     bool jump;
     bool canJump = true;
@@ -15,8 +15,6 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-        if (GetComponent<Rigidbody2D>().velocity.y == 0)
-            canJump = true;
         if (isMoving)
         {
             move = Input.GetAxisRaw("Horizontal");

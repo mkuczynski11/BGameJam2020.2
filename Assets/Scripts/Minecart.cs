@@ -13,6 +13,8 @@ public class Minecart : MonoBehaviour
     Rigidbody2D rb;
     float playerDistanceY = 1.35f;
     float playerDistanceX = 0.5f;
+    public GameObject gamemanager;
+    GameManager gamemanagerS;
 
     public AudioManager audioMenago;
 
@@ -21,6 +23,7 @@ public class Minecart : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
         rb = GetComponent<Rigidbody2D>();
         playerDistanceX += boxCollider.size.x + player.GetComponent<BoxCollider2D>().size.x;
+        gamemanagerS = gamemanager.GetComponent<GameManager>();
     }
 
     void Update()
@@ -63,6 +66,7 @@ public class Minecart : MonoBehaviour
 
         if(active)
         {
+            gamemanagerS.canChange = false;
             Vector2 vel = player.GetComponent<Rigidbody2D>().velocity;
             if (vel.x < 0) vel.x += 0.14f;
             if (vel.x > 0) vel.x -= 0.14f;
@@ -70,6 +74,7 @@ public class Minecart : MonoBehaviour
         }
         else
         {
+            gamemanagerS.canChange = true;
             rb.velocity = Vector2.zero;
         }
     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody2D))]
 
@@ -24,11 +25,17 @@ public class CharacterController : MonoBehaviour
     public ParticleSystem dust;
 
     public AudioManager audioMenago;
+    public BoxCollider2D bCollider;
+    public CircleCollider2D circleCollider1;
+    public CircleCollider2D circleCollider2;
+    public GameObject gameManagerObject;
+    GameManager gameManager;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        gameManager = gameManagerObject.GetComponent<GameManager>();
     }
 
     void FixedUpdate()
@@ -95,7 +102,41 @@ public class CharacterController : MonoBehaviour
     {
         playerSpeed = speed;
     }
-    
+
+    public void disableColliders()
+    {
+        bCollider.enabled = false;
+        circleCollider1.enabled = false;
+        circleCollider2.enabled = false;
+    }
+
+    public void enableColliders()
+    {
+        bCollider.enabled = true;
+        circleCollider1.enabled = true;
+        circleCollider2.enabled = true;
+    }
+
+    public void DamagePlayer(float damage)
+    {
+        gameManager.playerHp -= damage;
+        anim.SetTrigger("Hit");
+        checkDeath();
+    }
+
+    void checkDeath()
+    {
+        if (gameManager.playerHp <= 0f)
+        {
+            anim.SetTrigger("Dead");
+            gameObject.GetComponent<Rigidbody2D>().isKinematic = true;
+            gameObject.GetComponent<BoxCollider2D>().enabled = false;
+            gameObject.GetComponent<PlayerMovement>().isAbleToMove(false);
+            gameObject.tag = "Dead";
+            gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
+        }
+    }
+
     void PlayDust()
     {
         dust.Play();
