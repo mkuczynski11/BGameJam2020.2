@@ -20,6 +20,7 @@ public class CharacterController : MonoBehaviour
     bool isGrounded;
     Rigidbody2D rb;
     bool isFacingRight = true;
+    public bool frezzeFlip = false;
     Vector3 velocity = Vector3.zero;
 
     public ParticleSystem dust;
@@ -90,11 +91,14 @@ public class CharacterController : MonoBehaviour
         {
             PlayDust();
         }
-        isFacingRight = !isFacingRight;
+        if (!frezzeFlip)
+        {
+            isFacingRight = !isFacingRight;
 
-        Vector3 scale = transform.localScale;
-        scale.x *= -1;
-        transform.localScale = scale;
+            Vector3 scale = transform.localScale;
+            scale.x *= -1;
+            transform.localScale = scale;
+        }
     }
 
 

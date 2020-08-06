@@ -53,6 +53,9 @@ public class Minecart : MonoBehaviour
             active = true;
             player.GetComponent<PlayerMovement>().isAbleToJump(false);
             player.GetComponent<PlayerMovement>().setPlayerSpeed(10f);
+            player.GetComponent<Animator>().SetBool("isPushing", true);
+            player.GetComponent<Animator>().SetTrigger("Push");
+            player.GetComponent<CharacterController>().frezzeFlip = true;
             audioMenago.Play("Cart_Rolling");
         }
 
@@ -61,6 +64,8 @@ public class Minecart : MonoBehaviour
             active = false;
             player.GetComponent<PlayerMovement>().isAbleToJump(true);
             player.GetComponent<PlayerMovement>().setPlayerSpeed(20f);
+            player.GetComponent<Animator>().SetBool("isPushing", false);
+            player.GetComponent<CharacterController>().frezzeFlip = false;
             audioMenago.Stop("Cart_Rolling");
         }
 
@@ -68,8 +73,8 @@ public class Minecart : MonoBehaviour
         {
             gamemanagerS.canChange = false;
             Vector2 vel = player.GetComponent<Rigidbody2D>().velocity;
-            if (vel.x < 0) vel.x += 0.14f;
-            if (vel.x > 0) vel.x -= 0.14f;
+            if (vel.x < 0) vel.x += 0.43f;
+            if (vel.x > 0) vel.x -= 0.43f;
             rb.velocity = vel;
         }
         else
