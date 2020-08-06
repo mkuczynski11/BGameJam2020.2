@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.XR.WSA;
 
@@ -15,6 +16,7 @@ public class GameManager : MonoBehaviour
     Vector3 worldOffset = new Vector3(0f, 300f, 0f);
     public float playerHp = 100f;
     public Slider slider;
+    public GameObject restartButton;
 
     void Start()
     {
@@ -33,6 +35,7 @@ public class GameManager : MonoBehaviour
             changeView();
         }
         slider.value = playerHp;
+        Debug.Log(canChange);
     }
 
     void changeView()
@@ -97,5 +100,10 @@ public class GameManager : MonoBehaviour
             playerActive.position = new Vector3(-1000f, -1000f, 0f);
             mainCamera.GetComponent<Camera>().followChange(playerInActive);
         }
+    }
+
+    public void Restart()   
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

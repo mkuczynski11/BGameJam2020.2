@@ -39,6 +39,7 @@ public class GreenGhost : MonoBehaviour
             targetTransform = Patrol1;
             isFacingRight = false;
             goingRight = false;
+            Flip();
         }
         rb = GetComponent<Rigidbody2D>();
         bCollider = GetComponent<BoxCollider2D>();
@@ -80,6 +81,7 @@ public class GreenGhost : MonoBehaviour
                 Collider2D[] _colliders = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerMask);
                 foreach(Collider2D collider in _colliders)
                 {
+                    bCollider.isTrigger = true;
                     Attack();
                     player = collider.gameObject;
                     nextAttackTime = Time.time + 1f / attackRate;
@@ -111,6 +113,7 @@ public class GreenGhost : MonoBehaviour
         if (Time.time >= nextAttackTime)
         {
             rb.velocity = new Vector2(EnemySpeed * sign, 0f);
+            bCollider.isTrigger = false;
         }
     }
 

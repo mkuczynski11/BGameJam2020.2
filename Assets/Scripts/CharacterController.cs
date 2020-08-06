@@ -138,6 +138,7 @@ public class CharacterController : MonoBehaviour
             gameObject.GetComponent<PlayerMovement>().isAbleToMove(false);
             gameObject.tag = "Dead";
             gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
+            gameManager.restartButton.active = true;
         }
     }
 
