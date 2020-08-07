@@ -103,6 +103,8 @@ public class GameManager : MonoBehaviour
             playerActive.position = new Vector3(-1000f, -1000f, 0f);
             mainCamera.GetComponent<Camera>().followChange(playerInActive);
             levelCamera.transform.position += offset;
+
+            playerInActive.GetComponent<CharacterController>().rewindParticles.Play();
         }
     }
 
