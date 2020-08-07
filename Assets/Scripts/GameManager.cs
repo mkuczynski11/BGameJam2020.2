@@ -7,7 +7,7 @@ using UnityEngine.XR.WSA;
 
 public class GameManager : MonoBehaviour
 {
-    public string viewChange = "r";
+    public string viewChange = "q";
     public bool canChange = true;
     public LayerMask collisionAble;
     public GameObject mainCamera;
@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
         {
             changeView();
         }
-        if (Input.GetKeyDown("z"))
+        if (Input.GetKeyDown(KeyCode.LeftControl))
             cameraChange();
         slider.value = playerHp;
     }

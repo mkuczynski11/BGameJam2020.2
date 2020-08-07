@@ -133,11 +133,10 @@ public class CharacterController : MonoBehaviour
         if (gameManager.playerHp <= 0f)
         {
             anim.SetTrigger("Dead");
-            gameObject.GetComponent<Rigidbody2D>().isKinematic = true;
             gameObject.GetComponent<BoxCollider2D>().enabled = false;
             gameObject.GetComponent<PlayerMovement>().isAbleToMove(false);
             gameObject.tag = "Dead";
-            gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
+            gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, -10f);
             gameManager.restartButton.active = true;
         }
     }
