@@ -37,6 +37,7 @@ public class CharacterController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         gameManager = gameManagerObject.GetComponent<GameManager>();
+        audioMenago = FindObjectOfType<AudioManager>();
     }
 
     void FixedUpdate()

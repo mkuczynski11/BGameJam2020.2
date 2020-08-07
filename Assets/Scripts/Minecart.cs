@@ -24,6 +24,7 @@ public class Minecart : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         playerDistanceX += boxCollider.size.x + player.GetComponent<BoxCollider2D>().size.x;
         gamemanagerS = gamemanager.GetComponent<GameManager>();
+        audioMenago = FindObjectOfType<AudioManager>();
     }
 
     void Update()

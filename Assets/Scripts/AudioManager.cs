@@ -7,8 +7,21 @@ public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
 
+    public static AudioManager instance;
+
     void Awake()
     {
+        DontDestroyOnLoad(gameObject);
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+            return;
+        }
+
         foreach(Sound s in sounds)
         {
             s.source = gameObject.AddComponent<AudioSource>();
@@ -18,6 +31,11 @@ public class AudioManager : MonoBehaviour
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
         }
+    }
+
+    void Start()
+    {
+        Play("Theme");
     }
 
     public void Play(string name)
@@ -48,6 +66,8 @@ public class AudioManager : MonoBehaviour
                 break;
             default:
                 s = Array.Find(sounds, sound => sound.name == name);
+                if (s == null)
+                    return;
                 s.source.Play();
                 break;
         }

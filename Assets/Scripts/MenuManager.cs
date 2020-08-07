@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
+    public AudioManager audioMenago;
     public void Quit()
     {
         Quit();
@@ -12,6 +13,7 @@ public class MenuManager : MonoBehaviour
 
     public void Play()
     {
+        audioMenago.Play("Menu_Select");
         SceneManager.LoadScene(1);
     }
 }
