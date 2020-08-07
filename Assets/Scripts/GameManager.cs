@@ -116,4 +116,9 @@ public class GameManager : MonoBehaviour
         mainCamera.active = !mainCamera.active;
         levelCamera.active = !levelCamera.active;
     }
+
+    public void Quit()
+    {
+        Quit();
+    }
 }
