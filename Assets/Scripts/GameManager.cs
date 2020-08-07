@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public bool canChange = true;
     public LayerMask collisionAble;
     public GameObject mainCamera;
+    public GameObject levelCamera;
     GameObject world1, world2;
     GameObject activeWorld;
     Vector3 worldOffset = new Vector3(0f, 300f, 0f);
@@ -26,6 +27,7 @@ public class GameManager : MonoBehaviour
         GameObject.FindGameObjectWithTag("Player2").GetComponent<PlayerMovement>().isAbleToMove(false);
         GameObject.FindGameObjectWithTag("Player2").GetComponent<CharacterController>().disableColliders();
         GameObject.FindGameObjectWithTag("Player2").GetComponent<Rigidbody2D>().isKinematic = true;
+        levelCamera.active = false;
     }
 
     void Update()
@@ -34,8 +36,9 @@ public class GameManager : MonoBehaviour
         {
             changeView();
         }
+        if (Input.GetKeyDown("z"))
+            cameraChange();
         slider.value = playerHp;
-        Debug.Log(canChange);
     }
 
     void changeView()
@@ -99,11 +102,18 @@ public class GameManager : MonoBehaviour
             playerActive.GetComponent<Rigidbody2D>().isKinematic = true;
             playerActive.position = new Vector3(-1000f, -1000f, 0f);
             mainCamera.GetComponent<Camera>().followChange(playerInActive);
+            levelCamera.transform.position += offset;
         }
     }
 
     public void Restart()   
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    void cameraChange()
+    {
+        mainCamera.active = !mainCamera.active;
+        levelCamera.active = !levelCamera.active;
     }
 }

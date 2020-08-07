@@ -222,9 +222,9 @@ MonoBehaviour:
   Patrol1: {fileID: 1708710551205121673}
   Patrol2: {fileID: 1708710549971375294}
   EnemySpeed: 8
-  playerMask:
+  obsticleMask:
     serializedVersion: 2
-    m_Bits: 1536
+    m_Bits: 26368
   attackPoint: {fileID: 1708710550997685545}
   attackRange: 0.56
   attackRate: 0.5

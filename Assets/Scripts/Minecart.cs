@@ -37,7 +37,11 @@ public class Minecart : MonoBehaviour
                 distanceX = Mathf.Abs(Vector2.Distance(new Vector2(gameObject.transform.position.x, 0f), new Vector2(player.transform.position.x, 0f)));
                 if (distanceX <= playerDistanceX)
                 {
-                    activable = true;
+                    if (player.transform.localScale.x > 0 && (gameObject.transform.position.x - player.transform.position.x) > 0)
+                        activable = true;
+                    else if (player.transform.localScale.x < 0 && (player.transform.position.x - gameObject.transform.position.x) > 0)
+                        activable = true;
+                    else activable = false;
                 }
                 else
                 {
@@ -69,6 +73,19 @@ public class Minecart : MonoBehaviour
             audioMenago.Stop("Cart_Rolling");
         }
 
+        if(Mathf.Abs(rb.velocity.y) > 5f)
+        {
+            if(active)
+            {
+                active = false;
+                player.GetComponent<PlayerMovement>().isAbleToJump(true);
+                player.GetComponent<PlayerMovement>().setPlayerSpeed(20f);
+                player.GetComponent<Animator>().SetBool("isPushing", false);
+                player.GetComponent<CharacterController>().frezzeFlip = false;
+                audioMenago.Stop("Cart_Rolling");
+            }
+        }
+
         if(active)
         {
             gamemanagerS.canChange = false;
@@ -80,7 +97,7 @@ public class Minecart : MonoBehaviour
         else
         {
             gamemanagerS.canChange = true;
-            rb.velocity = Vector2.zero;
+            rb.velocity = new Vector2(0f, rb.velocity.y);
         }
     }
 }

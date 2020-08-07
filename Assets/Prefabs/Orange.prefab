@@ -177,8 +177,9 @@ MonoBehaviour:
   airControl: 1
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 8448
   groundCheck: {fileID: 1777729496042388465}
+  frezzeFlip: 0
   dust: {fileID: 1777729495683686128}
   audioMenago: {fileID: 0}
   bCollider: {fileID: 1777729495353635870}

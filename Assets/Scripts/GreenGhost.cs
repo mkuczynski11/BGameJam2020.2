@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Net;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class GreenGhost : MonoBehaviour
 {
     public Transform Patrol1, Patrol2;
     public float EnemySpeed = 12f;
-    public LayerMask playerMask;
+    public LayerMask obsticleMask;
     Animator anim;
     Rigidbody2D rb;
     BoxCollider2D bCollider;
@@ -48,7 +49,7 @@ public class GreenGhost : MonoBehaviour
     void Update()
     {
         bool isDead = false;
-        Collider2D[] colliders = Physics2D.OverlapAreaAll(Patrol1.position, Patrol2.position, playerMask);
+        Collider2D[] colliders = Physics2D.OverlapAreaAll(Patrol1.position, Patrol2.position, obsticleMask);
         foreach (Collider2D collider in colliders)
         {
             if ((collider.tag == "Player1" || collider.tag == "Player2"))
@@ -78,7 +79,7 @@ public class GreenGhost : MonoBehaviour
             }
             else if(Time.time >= nextAttackTime)
             {
-                Collider2D[] _colliders = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerMask);
+                Collider2D[] _colliders = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, obsticleMask);
                 foreach(Collider2D collider in _colliders)
                 {
                     bCollider.isTrigger = true;
