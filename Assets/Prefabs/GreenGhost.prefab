@@ -228,7 +228,7 @@ MonoBehaviour:
   attackPoint: {fileID: 1708710550997685545}
   attackRange: 0.56
   attackRate: 0.5
-  attackDamage: 40
+  attackDamage: 50
 --- !u!50 &1708710549718389148
 Rigidbody2D:
   serializedVersion: 4
