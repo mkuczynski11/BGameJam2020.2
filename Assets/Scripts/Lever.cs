@@ -11,10 +11,13 @@ public class Lever : MonoBehaviour
     public Sprite rightSprite;
     Sprite currentSprite;
 
+    public AudioManager audioMenago;
+
     void Start()
     {
         currentSprite = leftSprite;
         GetComponent<SpriteRenderer>().sprite = currentSprite;
+        audioMenago = FindObjectOfType<AudioManager>();
     }
 
     void Update()
@@ -27,6 +30,7 @@ public class Lever : MonoBehaviour
                 GetComponent<SpriteRenderer>().sprite = leftSprite;
             currentSprite = GetComponent<SpriteRenderer>().sprite;
             handleObjects();
+            audioMenago.Play("Lever");
             Debug.Log("Lever pulled");
         }
     }

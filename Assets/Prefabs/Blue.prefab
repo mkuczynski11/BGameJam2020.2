@@ -181,6 +181,9 @@ MonoBehaviour:
   groundCheck: {fileID: 2587335146234446549}
   frezzeFlip: 0
   dust: {fileID: 2587335144627622077}
+  blood: {fileID: 6186270523096194360, guid: 2ae72a106f7116f4aa95b2a8efdbe843, type: 3}
+  rewindParticles: {fileID: 2509895634008077438, guid: 1585240b66a5a8b468158cc30c066a96,
+    type: 3}
   audioMenago: {fileID: 0}
   bCollider: {fileID: 2587335144499896677}
   circleCollider1: {fileID: 2587335144499896679}

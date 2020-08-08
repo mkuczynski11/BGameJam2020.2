@@ -24,6 +24,8 @@ public class CharacterController : MonoBehaviour
     Vector3 velocity = Vector3.zero;
 
     public ParticleSystem dust;
+    public ParticleSystem blood;
+    public ParticleSystem rewindParticles;
 
     public AudioManager audioMenago;
     public BoxCollider2D bCollider;
@@ -126,6 +128,8 @@ public class CharacterController : MonoBehaviour
     {
         gameManager.playerHp -= damage;
         anim.SetTrigger("Hit");
+        PlayBlood();
+        audioMenago.Play("hurt_quotes");
         checkDeath();
     }
 
@@ -145,6 +149,16 @@ public class CharacterController : MonoBehaviour
     void PlayDust()
     {
         dust.Play();
+    }
+
+    void PlayBlood()
+    {
+        blood.Play();
+    }
+
+    void PlayRewindParticles()
+    {
+        rewindParticles.Play();
     }
 }
 

@@ -64,6 +64,11 @@ public class AudioManager : MonoBehaviour
                 s = sounds[number];
                 s.source.Play();
                 break;
+            case "hurt_quotes":
+                number = UnityEngine.Random.Range(16, 18);
+                s = sounds[number];
+                s.source.Play();
+                break;
             default:
                 s = Array.Find(sounds, sound => sound.name == name);
                 if (s == null)
